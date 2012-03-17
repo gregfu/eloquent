@@ -1,0 +1,30 @@
+#! /usr/bin/env ruby
+# --------------------------------------------------------------------------------
+# Eloquent main binary
+# --------------------------------------------------------------------------------
+
+require 'optparse'
+require 'eloquent'
+require 'pp'
+
+options = {}
+
+bin_name = File.basename(File.expand_path(".",__FILE__))
+OptionParser.new do |opts|
+  opts.banner = <<-EOD.gsub(/^    /, '')
+    Usage: #{bin_name} [options]
+  EOD
+
+  opts.on("-v", "--verbose", "Run in verbose mode.") do
+    options[:verbose] = true
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+end.parse!
+
+app = Eloquent::App.new(options,ARGV)
+app.run
+
