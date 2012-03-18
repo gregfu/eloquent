@@ -10,16 +10,22 @@ module BinSupport
     end
   end
 
+  def in_blog(name)
+    Dir.chdir(name) do
+      yield if block_given?
+    end
+  end
+
   def bin_file
     File.join(BIN_DIR, "eloquent")
   end
 
-  def file(name)
-    File.file?(name)
+  def file(*elems)
+    File.file?(File.join(*elems))
   end
 
-  def dir(name)
-    File.directory?(name)
+  def dir(*elems)
+    File.directory?(File.join(*elems))
   end
 
   def eloquent_bin(*args)
@@ -29,6 +35,18 @@ module BinSupport
   end
 
   def cleanup(dir)
-    FileUtils.rm_rf(dir)
+    to_remove = File.join(TMP_DIR, dir)
+    FileUtils.rm_rf(to_remove)
+  end
+
+  def article(title)
+    pp Dir.pwd
+    IO.read("articles/#{title}/#{title}.md")
+  end
+
+  def next_blog_name
+    @counter ||= 0
+    @counter += 1
+    "new_blog_#{@counter}"
   end
 end

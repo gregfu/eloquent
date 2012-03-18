@@ -6,6 +6,7 @@ $:.unshift File.expand_path("../../lib", __FILE__)
 
 require 'optparse'
 require 'eloquent'
+require 'fileutils'
 require 'pp'
 
 
@@ -18,7 +19,7 @@ OptionParser.new do |opts|
     --------------------------------------------------------------------------------
       #{bin_name} new [options]
       #{bin_name} page [options]
-      #{bin_name} post [options]
+      #{bin_name} article [options]
       #{bin_name} publish
       
   EOD
@@ -33,4 +34,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-Eloquent.command(options,ARGV)
+Eloquent.command(ARGV, options)

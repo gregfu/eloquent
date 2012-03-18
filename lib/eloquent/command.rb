@@ -1,21 +1,28 @@
-TEMPLATES_DIR = File.expand_path("../../../templates", __FILE__)
-
 module Eloquent
-  def self.command(opts, args)
+  def self.command(args, options)
     STDOUT.puts("Eloquent")
-    STDOUT.puts(" -> running in verbose mode.") if opts[:verbose]
-    if args.delete("new") and blog_name = args.shift
-      STDOUT.puts "Generating new blog #{blog_name}"
+    STDOUT.puts(" -> running in verbose mode.") if options[:verbose]
 
-      FileUtils.mkdir_p(blog_name)
+    cmd = args.shift
+    case cmd
+    when /new/ then
+      if blog_name = args.shift
+        STDOUT.puts "Generating new blog #{blog_name}"
 
-      ["articles", "pages", "design", "design/includes", "design/layouts", "_site"].each do |dir|
-        FileUtils.mkdir_p(File.join(blog_name, dir))
+        FileUtils.mkdir_p(blog_name)
+
+        ["articles", "pages", "design", "design/includes", "design/layouts", "_site"].each do |dir|
+          FileUtils.mkdir_p(File.join(blog_name, dir))
+        end
+
+        ["_config.yml"].each do |file|
+          copy_template(file, File.join(blog_name,file))
+        end
       end
-
-      ["_config.yml"].each do |file|
-        copy_template(file, File.join(blog_name,file))
-      end
+    when /post/ then
+      Article.new(args.first, options).save
+    else
+      raise "Unsupported command"
     end
   end
 
