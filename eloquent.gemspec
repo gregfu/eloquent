@@ -4,8 +4,12 @@ require File.expand_path('../lib/eloquent/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Greg Furmanek"]
   gem.email         = ["greg.furmanek@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = <<-EOD.gsub(/^    /, '')
+    Static blog generator
+  EOD
+  gem.summary       = <<-EOD.gsub(/^    /, '')
+    Static blog generator
+  EOD
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)

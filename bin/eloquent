@@ -2,17 +2,25 @@
 # --------------------------------------------------------------------------------
 # Eloquent main binary
 # --------------------------------------------------------------------------------
+$:.unshift File.expand_path("../../lib", __FILE__)
 
 require 'optparse'
 require 'eloquent'
 require 'pp'
+
 
 options = {}
 
 bin_name = File.basename(File.expand_path(".",__FILE__))
 OptionParser.new do |opts|
   opts.banner = <<-EOD.gsub(/^    /, '')
-    Usage: #{bin_name} [options]
+    Usage: 
+    --------------------------------------------------------------------------------
+      #{bin_name} new [options]
+      #{bin_name} page [options]
+      #{bin_name} post [options]
+      #{bin_name} publish
+      
   EOD
 
   opts.on("-v", "--verbose", "Run in verbose mode.") do
@@ -25,6 +33,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-app = Eloquent::App.new(options,ARGV)
-app.run
-
+Eloquent.command(options,ARGV)

@@ -14,9 +14,21 @@ module BinSupport
     File.join(BIN_DIR, "eloquent")
   end
 
+  def file(name)
+    File.file?(name)
+  end
+
+  def dir(name)
+    File.directory?(name)
+  end
+
   def eloquent_bin(*args)
     options = *args
     cmd = ([bin_file] + options).join(" ")
     Open3.capture3(cmd)
+  end
+
+  def cleanup(dir)
+    FileUtils.rm_rf(dir)
   end
 end
