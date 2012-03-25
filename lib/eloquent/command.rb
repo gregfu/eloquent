@@ -18,11 +18,22 @@ module Eloquent
         ["_config.yml"].each do |file|
           copy_template(file, File.join(blog_name,file))
         end
+      else
+        STDOUT.puts("Please provide name for your blog")
+        exit
       end
-    when /post/ then
-      Article.new(args.first, options).save
+    when /(article|post)/ then
+      if title = args.shift
+        Article.new(title, options).save
+      else
+        STDOUT.puts("Please provide article name.")
+        exit
+      end
+    when /generate/ then
+      Generator.new.generate!
     else
-      raise "Unsupported command"
+      Banner.print
+      exit(1)
     end
   end
 

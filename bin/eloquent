@@ -14,17 +14,14 @@ options = {}
 
 bin_name = File.basename(File.expand_path(".",__FILE__))
 OptionParser.new do |opts|
-  opts.banner = <<-EOD.gsub(/^    /, '')
-    Usage: 
-    --------------------------------------------------------------------------------
-      #{bin_name} new [options]
-      #{bin_name} page [options]
-      #{bin_name} article [options]
-      #{bin_name} publish
-      
-  EOD
+  opts.banner = Eloquent::Banner.to_s
 
-  opts.on("-v", "--verbose", "Run in verbose mode.") do
+  opts.on_tail("--version", "Show software version.") do
+    puts "Eloquent, version: #{Eloquent::VERSION}"
+    exit
+  end
+
+  opts.on_tail("-v", "--verbose", "Run in verbose mode.") do
     options[:verbose] = true
   end
 

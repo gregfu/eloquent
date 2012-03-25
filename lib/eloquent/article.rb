@@ -17,6 +17,7 @@ module Eloquent
         subtitle = @options[:subtitle]
         f.write(ERB.new(IO.read(template)).result(binding))
       end
+      STDOUT.puts("Article #{@title} has been created")
     end
   end
 end
