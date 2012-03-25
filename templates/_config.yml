@@ -1,3 +1,5 @@
 ---
 generator:
   site: "_site"
+  articles: "articles"
+  pages: "pages"

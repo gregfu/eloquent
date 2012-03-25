@@ -30,7 +30,8 @@ module Eloquent
         exit
       end
     when /generate/ then
-      Generator.new.generate!
+      config = YAML.load_file("_config.yml")
+      Generator.new(config).generate!
     else
       Banner.print
       exit(1)

@@ -59,8 +59,24 @@ describe "Feature: install workspace." do
       @out.should match(/provide article name/)
     end
 
+    it "I can generate site" do
+      in_tmp do
+        @out, @err = eloquent_bin("new", "gen")
+        Dir.chdir("gen") do
+          eloquent_bin("article", "foo")
+
+          File.open(File.join("articles", "foo", "foo.md"), 'a+') do |f|
+            f.puts("# Test")
+          end
+
+          @out, @err = eloquent_bin("generate")
+          @out.should match(/Site generated/)
+          IO.read("_site/articles/foo.html").should match(/Test/)
+        end
+      end
+    end
+
     it "I can generate template"
-    it "I can generate site"
     it "I can install on a server"
     it "I can publish to server"
 

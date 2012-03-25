@@ -1,3 +1,4 @@
+require "rubygems"
 require "eloquent/banner"
 require "eloquent/consts"
 require "eloquent/version"

@@ -3,8 +3,10 @@ require 'spec_helper'
 describe Eloquent::Generator do
   around(:each) do |example|
     @config = {
-      "site" => "_site",
-      "articles" => "articles",
+      "generator" => {
+        "site" => "_site",
+        "articles" => "articles",
+      }
     }
 
     in_tmp do

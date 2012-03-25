@@ -11,6 +11,6 @@ require "#{LIB_DIR}/eloquent"
 RSpec.configure do |config|
   config.include BinSupport
   config.mock_with :rspec
-  config.fail_fast = true
+  #config.fail_fast = true
 end
 

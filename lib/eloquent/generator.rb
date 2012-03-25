@@ -1,7 +1,7 @@
 module Eloquent
   class Generator
     def initialize(config)
-      @config = config
+      @config = config["generator"]
     end
 
     def generate!
@@ -13,6 +13,7 @@ module Eloquent
           STDOUT.puts("Page not found")
         end
       end
+      STDOUT.puts("Site generated")
     end
 
     def site
