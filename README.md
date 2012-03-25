@@ -1,24 +1,30 @@
 # Eloquent
 
-TODO: Write a gem description
+Eloquent is a static site generator meant for people who prefer writing
+their posts using a proper editor (vi/text mate).  If you enjoy editing
+your posts using haml this may be a solution for you.
+
+## Notice
+
+This project is in it's very early stages and most likely may not work
+for a while. So use it at your own risk.
 
 ## Installation
 
 Add this line to your application's Gemfile:
-
-    gem 'eloquent'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install eloquent
+  
+  gem install eloquent
 
 ## Usage
 
-TODO: Write usage instructions here
+### Create new workspace
+
+  $ eloquent new blog-name.com
+
+  $ cd blog-name.com
+
+  $ eloquent article foo_bar
+
 
 ## Contributing
 
