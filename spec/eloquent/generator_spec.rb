@@ -17,26 +17,23 @@ describe Eloquent::Generator do
 
   end
   
+  let(:gen) { Eloquent::Generator.new(@config) }
   it "can init" do
-    gen = Eloquent::Generator.new(@config)
     gen.site.should == "_site"
   end
 
   it "has articles dst" do
-    gen = Eloquent::Generator.new(@config)
     gen.articles_dst.should == "_site/articles"
   end
 
   it "can enumerate articles" do
     in_tmp do
-      gen = Eloquent::Generator.new(@config)
       gen.articles.should be_a(Array)
     end
   end
 
   it "can generate article" do
     in_tmp do
-      gen = Eloquent::Generator.new(@config)
       gen.generate!
     end
   end
