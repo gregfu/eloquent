@@ -77,7 +77,7 @@ module Eloquent
     end
 
     def stylesheet(name, media = "all")
-      %|<link href="styles/#{name}.css" media="#{media}">|
+      %|<link rel="stylesheet" href="/styles/#{name}.css" type="text/css" media="#{media}">|
     end
   end
 end
