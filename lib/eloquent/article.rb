@@ -15,6 +15,7 @@ module Eloquent
         current_time = Time.now
         title = @title
         subtitle = @options[:subtitle]
+        layout = @options[:layout] || "default"
         f.write(ERB.new(IO.read(template)).result(binding))
       end
       STDOUT.puts("Article #{@title} has been created")

@@ -20,9 +20,10 @@ Gem::Specification.new do |gem|
   gem.version       = Eloquent::VERSION
 
   gem.add_dependency 'rdiscount'
+  gem.add_dependency 'haml'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov'
   gem.add_development_dependency 'guard-rspec'
-  gem.add_development_dependency 'growl'
+  #gem.add_development_dependency 'growl'
 end

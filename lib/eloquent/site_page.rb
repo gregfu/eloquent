@@ -1,4 +1,5 @@
 require 'rdiscount'
+require 'haml'
 module Eloquent
   class SitePage
     attr_reader :src_dir
@@ -11,19 +12,15 @@ module Eloquent
     end
 
     def body
-      @body ||=
-        begin
-          header, body = contents.split("--- Contnet ---", 2)
-          body
-        end
+      @body ||= parts[1]
     end
 
     def header
-      @header ||=
-        begin
-          header, body = contents.split("--- Contnet ---", 2)
-          YAML.load(header)
-        end
+      @header ||= YAML.load(parts[0])
+    end
+
+    def parts
+      @parts ||= contents.split("--- Contnet ---", 2)
     end
 
     def article_file
@@ -56,7 +53,27 @@ module Eloquent
     end
 
     def result
-      @result ||= RDiscount.new(body).to_html
+      @result ||= 
+        begin
+          title = header["title"]
+          Haml::Engine.new(layout_content).render(self, :article => self)
+        end
+    end
+
+    def title
+      header["title"]
+    end
+
+    def layout_name
+      header["layout"] || "default"
+    end
+
+    def layout_content
+      @layout_content ||= IO.read("design/layouts/#{layout_name}.html.haml")
+    end
+
+    def page_body
+      RDiscount.new(body).to_html
     end
   end
 end

@@ -63,6 +63,7 @@ describe "Feature: install workspace." do
       in_tmp do
         @out, @err = eloquent_bin("new", "gen")
         Dir.chdir("gen") do
+          eloquent_bin("layout", "default")
           eloquent_bin("article", "foo")
 
           File.open(File.join("articles", "foo", "foo.md"), 'a+') do |f|
@@ -71,7 +72,10 @@ describe "Feature: install workspace." do
 
           @out, @err = eloquent_bin("generate")
           @out.should match(/Site generated/)
-          IO.read("_site/articles/foo.html").should match(/Test/)
+
+          page_content = IO.read("_site/articles/foo.html")
+          page_content.should match(/Test/)
+          page_content.should match(/<html/)
         end
       end
     end
@@ -81,6 +85,10 @@ describe "Feature: install workspace." do
         @out, @err = eloquent_bin "layout", "default"
         data = IO.read("design/layouts/default.html.haml")
         data.should match(/!!! 5/)
+        data.should match(/%html/)
+        data.should match(/%head/)
+        data.should match(/%title/)
+        data.should match(/%body/)
       end
     end
 
