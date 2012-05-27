@@ -75,5 +75,9 @@ module Eloquent
     def page_body
       RDiscount.new(body).to_html
     end
+
+    def stylesheet(name, media = "all")
+      %|<link href="styles/#{name}.css" media="#{media}">|
+    end
   end
 end

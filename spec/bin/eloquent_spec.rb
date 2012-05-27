@@ -18,9 +18,12 @@ describe "Feature: install workspace." do
         dir("new_blog/design").should be
         dir("new_blog/design/includes").should be
         dir("new_blog/design/layouts").should be
+        dir("new_blog/design/scripts").should be
+        dir("new_blog/design/styles").should be
 
         dir("new_blog/_site").should be
         file("new_blog/_config.yml").should be
+        file("new_blog/design/styles/default.sass").should be
       end
     end
 
@@ -72,6 +75,10 @@ describe "Feature: install workspace." do
 
           @out, @err = eloquent_bin("generate")
           @out.should match(/Site generated/)
+
+          dir("_site/styles").should be
+          dir("_site/scripts").should be
+          file("_site/styles/default.css").should be
 
           page_content = IO.read("_site/articles/foo.html")
           page_content.should match(/Test/)
