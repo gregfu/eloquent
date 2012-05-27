@@ -35,6 +35,7 @@ describe Eloquent::Generator do
   it "can generate article" do
     in_tmp do
       gen.generate!
+      # verify things got generated ...
     end
   end
 end

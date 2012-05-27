@@ -32,6 +32,13 @@ module Eloquent
     when /generate/ then
       config = YAML.load_file("_config.yml")
       Generator.new(config).generate!
+    when /layout/ then
+      if name = args.shift
+        Layout.new(name, options).save
+      else
+        STDERR.puts("Please provide template name.")
+        exit
+      end
     else
       Banner.print
       exit(1)

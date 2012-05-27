@@ -76,7 +76,14 @@ describe "Feature: install workspace." do
       end
     end
 
-    it "I can generate template"
+    it "I can generate layout" do
+      in_tmp do
+        @out, @err = eloquent_bin "layout", "default"
+        data = IO.read("design/layouts/default.html.haml")
+        data.should match(/!!! 5/)
+      end
+    end
+
     it "I can install on a server"
     it "I can publish to server"
 
