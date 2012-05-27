@@ -73,12 +73,17 @@ describe "Feature: install workspace." do
             f.puts("# Test")
           end
 
+          File.open(File.join("design", "styles", "foo.css"), 'w') do |f|
+            f.puts("a { color : '#ccc' }")
+          end
+
           @out, @err = eloquent_bin("generate")
           @out.should match(/Site generated/)
 
           dir("_site/styles").should be
           dir("_site/scripts").should be
           file("_site/styles/default.css").should be
+          file("_site/styles/foo.css").should be
 
           page_content = IO.read("_site/articles/foo.html")
           page_content.should match(/Test/)

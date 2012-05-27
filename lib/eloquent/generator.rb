@@ -16,8 +16,15 @@ module Eloquent
         css_file_name = change_ext(style, "css")
         destination =  File.join(styles_dir, css_file_name)
 
-        File.open(destination, "w") do |f|
-          f.write(Sass::Engine.new(IO.read(style)).render)
+        case File.extname(style)
+        when /sass/ then
+          File.open(destination, "w") do |f|
+            f.write(Sass::Engine.new(IO.read(style)).render)
+          end
+        when /css/ then 
+          FileUtils.cp(style, destination)
+        else
+          $stderr.puts "File format not recognized: [SKIPPING]"
         end
       end
     end
