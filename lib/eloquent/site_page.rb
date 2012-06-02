@@ -1,5 +1,14 @@
 require 'rdiscount'
 require 'haml'
+
+class NilClass
+  def blank?; true; end
+end
+
+class String
+  alias :blank? :empty?
+end
+
 module Eloquent
   class SitePage
     attr_reader :src_dir
@@ -64,6 +73,14 @@ module Eloquent
       header["title"]
     end
 
+    def subtitle
+      header["subtitle"]
+    end
+
+    def author
+      header["author"]
+    end
+
     def layout_name
       header["layout"] || "default"
     end
@@ -78,6 +95,10 @@ module Eloquent
 
     def stylesheet(name, media = "all")
       %|<link rel="stylesheet" href="/styles/#{name}.css" type="text/css" media="#{media}">|
+    end
+
+    def link_to(text, url)
+      %|<a href="#{url}.html">#{text}</a>|
     end
   end
 end
