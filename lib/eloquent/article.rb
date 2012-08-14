@@ -18,7 +18,7 @@ module Eloquent
         layout = @options[:layout] || "default"
         f.write(ERB.new(IO.read(template)).result(binding))
       end
-      STDOUT.puts("Article #{@title} has been created")
+      $stdout.puts("Article #{@title} has been created")
       return self
     end
 

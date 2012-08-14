@@ -109,17 +109,19 @@ describe "Feature: install workspace" do
       end
     end
 
-    describe "Watcher" do
-      it "generates html article when file has changed"
-      it "notifies browser to reload when file has changed"
-    end
-
     describe "Deployment" do
       it "I can initialize a server"
       it "I can publish to a server"
 
       it "I can't intialize misconfigured server"
       it "I can't deploy to a  misconfigured server"
+    end
+
+    describe "Watcher" do
+      it "generates html article when file has changed"
+      it "notifies browser to reload when file has changed"
+      it "regenerates site when layout has changed"
+      it "regenerates site when layout's css has changed"
     end
   end
 end
