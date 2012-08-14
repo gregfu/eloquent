@@ -22,9 +22,14 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rdiscount'
   gem.add_dependency 'haml'
   gem.add_dependency 'sass'
-  gem.add_development_dependency 'rspec'
+
+  #gem.add_development_dependency 'rspec'
+  #gem.add_development_dependency 'guard-rspec'
+  
   gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'm'
   gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'guard-rspec'
-  #gem.add_development_dependency 'growl'
+  gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'minitest-matchers'
+  gem.add_development_dependency 'guard-minitest'
 end

@@ -1,4 +1,4 @@
-module BinSupport
+module IntegrationSupport
   FIXTURES = File.expand_path("../../fixtures", __FILE__)
   def create_tmp_if_needed
     FileUtils.mkdir_p(TMP_DIR) unless File.exists?(TMP_DIR)
@@ -29,7 +29,7 @@ module BinSupport
     File.directory?(File.join(*elems))
   end
 
-  def eloquent_bin(*args)
+  def eloquent_command(*args)
     options = *args
     cmd = ([bin_file] + options).join(" ")
     Open3.capture3(cmd)
